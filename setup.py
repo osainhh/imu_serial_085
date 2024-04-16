@@ -23,4 +23,5 @@ setup(
             'imu_serial = imu_serial_085.imu_serial:main'
         ],
     },
+    py_modules=["imu_serial_085.bno085"]
 )
