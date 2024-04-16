@@ -48,9 +48,9 @@ class BNO085(Serial):
             self.accel_y = float(imu_data[9])
             self.accel_z = float(imu_data[10])
 
-            self.angle_x = 0.0
-            self.angle_y = 0.0
-            self.angle_z = 0.0
+            self.angle_x = float(imu_data[16])
+            self.angle_y = float(imu_data[17])
+            self.angle_z = float(imu_data[18])
 
             self.magnetic_x = float(imu_data[12])
             self.magnetic_y = float(imu_data[13])
