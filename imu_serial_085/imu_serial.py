@@ -2,7 +2,6 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu, MagneticField
 from geometry_msgs.msg import Vector3
-import subprocess
 
 from .bno085 import BNO085
 
@@ -13,7 +12,6 @@ class Imu085(Node):
         self.pub_mag = self.create_publisher(MagneticField, '/sensor/bno085/MagF', 10)
         self.pub_ang = self.create_publisher(Vector3, '/sensor/bno085/Angle', 10)
         self.tmr = self.create_timer(time_interval, self.callback)
-        subprocess.call("sudo chmod 777 /dev/ttyACM0", shell=True)
         self.imu_sensor = BNO085("/dev/ttyACM0")
     
     def callback(self):
@@ -22,6 +20,7 @@ class Imu085(Node):
         msg_ang = Vector3()
 
         # BNO085 getData
+        quat, velocity, accel, angle, magnetic = self.imu_sensor.getData();
 
         msg_imu.orientation.x = quat[0]
         msg_imu.orientation.y = quat[1]
@@ -47,7 +46,7 @@ class Imu085(Node):
 
 
 def main(args=None):
-    print('BNO085 Node test')
+    print('BNO085 Node IMU/Angle/MagF')
     
     rclpy.init(args=args)
     node_imu_serial_085 = Imu085(time_interval=0.01)
