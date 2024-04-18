@@ -6,6 +6,8 @@ IMUを接続後，Nodeを起動してください．
 ### ros2ワークスペース/src に配置後，colconでビルド
 $ colcon build --packages-select imu_serial_085
 
+$ source ~/ros2_ws/install/setup.bash
+
 ### USBシリアル権限の自動付与
 /lib/udev/rules.d/50-udev-default.rules
 
